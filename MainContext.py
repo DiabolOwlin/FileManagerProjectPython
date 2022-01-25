@@ -31,7 +31,7 @@ class MainContextMenu(tkinter.Menu):
             command = "mkdir {0}".format(dir_name).split(' ')
 
             # executing command with separate process
-            process = subprocess.Popen(command, cwd=self.main_window.path_text.get(), shell=True, stdout=subprocess.PIPE,
+            process = subprocess.Popen(command, cwd=self.main_window.path_text.get(), stdout=subprocess.PIPE,
                                        stderr=subprocess.PIPE)
             out, err = process.communicate()
 
@@ -46,7 +46,7 @@ class MainContextMenu(tkinter.Menu):
             command = "touch {0}".format(dir_name).split(' ')
 
             # executing command with separate process
-            process = subprocess.Popen(command, cwd=self.main_window.path_text.get(), shell=True, stdout=subprocess.PIPE,
+            process = subprocess.Popen(command, cwd=self.main_window.path_text.get(), stdout=subprocess.PIPE,
                                        stderr=subprocess.PIPE)
             out, err = process.communicate()
 
@@ -62,7 +62,7 @@ class MainContextMenu(tkinter.Menu):
         if os.path.isdir(self.main_window.buff):
 
             # executing command with separate process
-            process = subprocess.Popen(['cp', '-r', copy_obj, to_dir], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            process = subprocess.Popen(['cp', '-r', copy_obj, to_dir], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, err = process.communicate()
 
             # if error occurred
@@ -70,7 +70,7 @@ class MainContextMenu(tkinter.Menu):
                 messagebox.showwarning("Operation is not possible!", err.decode("utf-8"))
         else:
             # executing command with separate process
-            process = subprocess.Popen(['cp', '-n', copy_obj, to_dir], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            process = subprocess.Popen(['cp', '-n', copy_obj, to_dir], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, err = process.communicate()
 
             # if error occurred

@@ -1,11 +1,11 @@
-import tkinter as tk
+import tkinter
 import os
 import subprocess
 from tkinter import messagebox
 from tkinter import simpledialog
 
 
-class DirContextMenu(tk.Menu):
+class DirContextMenu(tkinter.Menu):
     def __init__(self, main_window, parent):
         super(DirContextMenu, self).__init__(parent, tearoff=0)
         self.main_window = main_window
@@ -19,13 +19,12 @@ class DirContextMenu(tk.Menu):
         self.main_window.refresh_window()
 
     def delete_dir(self):
-        cmd = "rm"
         full_path = self.main_window.path_text.get() + self.main_window.selected_file
         # print(full_path)
         if os.path.isdir(full_path):
 
             # executing command with separate process
-            process = subprocess.Popen(['rm', '-rf', full_path], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            process = subprocess.Popen(['rm', '-rf', full_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             output, err = process.communicate()
 
             print(output)
@@ -44,7 +43,7 @@ class DirContextMenu(tk.Menu):
             new_dir = self.main_window.path_text.get() + new_name
 
             # executing command with separate process
-            process = subprocess.Popen(['mv', old_dir, new_dir], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            process = subprocess.Popen(['mv', old_dir, new_dir], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             output, err = process.communicate()
             print(output)
             print(err)

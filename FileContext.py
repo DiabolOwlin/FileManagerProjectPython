@@ -22,17 +22,17 @@ class FileContextMenu(tkinter.Menu):
 
         if ext in ['txt', 'py', 'html', 'css', 'js']:
             if 'mousepad' in self.main_window.all_program:
-                subprocess.Popen(["mousepad", full_path], shell=True, start_new_session=True)
+                subprocess.Popen(["mousepad", full_path], start_new_session=True)
             else:
                 self.problem_message()
         elif ext == 'pdf':
             if 'evince' in self.main_window.all_program:
-                subprocess.run(["evince", full_path], shell=True, start_new_session=True)
+                subprocess.run(["evince", full_path], start_new_session=True)
             else:
                 self.problem_message()
         elif ext in ['png', 'jpeg', 'jpg', 'gif']:
             if 'ristretto' in self.main_window.all_program:
-                subprocess.run(["ristretto", full_path], shell=True, start_new_session=True)
+                subprocess.run(["ristretto", full_path], start_new_session=True)
             else:
                 self.problem_message()
         else:
@@ -50,7 +50,7 @@ class FileContextMenu(tkinter.Menu):
         full_path = self.main_window.path_text.get() + self.main_window.selected_file
 
         # executing command with separate process
-        process = subprocess.Popen(['rm', full_path], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        process = subprocess.Popen(['rm', full_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output, err = process.communicate()
 
         # if error occurred
@@ -66,7 +66,7 @@ class FileContextMenu(tkinter.Menu):
             new_file = self.main_window.path_text.get() + new_name
 
             # executing command with separate process
-            process = subprocess.Popen(['mv', old_file, new_file], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            process = subprocess.Popen(['mv', old_file, new_file], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             output, err = process.communicate()
 
             # if error occurred

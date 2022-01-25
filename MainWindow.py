@@ -1,3 +1,4 @@
+import tkinter
 from MainContext import *
 from FileContext import *
 from DirContext import *
@@ -12,7 +13,8 @@ class MainWindow:
 
         self.hidden_dir = tkinter.IntVar()
         self.buff = None
-        self.all_program = os.listdir('C:/')
+        self.all_program = os.listdir('/')
+        # self.all_program = os.listdir('/')
 
         self.root.bind('<Button-1>', self.root_click)
         self.root.bind('<FocusOut>', self.root_click)
@@ -97,10 +99,13 @@ class MainWindow:
         # main context menu
         self.main_context_menu = MainContextMenu(self, self.canvas)
         self.canvas.bind('<Button-3>', self.main_context_menu.popup_menu)
+
         if self.buff:
             self.main_context_menu.add_command(label="Insert", command=self.main_context_menu.insert_to_dir)
+
         # file context menu
         self.file_context_menu = FileContextMenu(self, self.inner_frame)
+
         # directory context menu
         self.dir_context_menu = DirContextMenu(self, self.inner_frame)
 
@@ -108,6 +113,7 @@ class MainWindow:
         for item in dir_list:
 
             if os.path.isdir(str(path) + item):
+
                 # processing directories
                 if os.access(str(path) + item, os.R_OK):
                     if (not self.hidden_dir.get() and not item.startswith('.')) or self.hidden_dir.get():
